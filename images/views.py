@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from rest_framework import viewsets
-
-from .models import Image
-from .serializers import ImageSerializer
+import requests
 
 
-class ImageViewSet(viewsets.ModelViewSet):
-    queryset = Image.objects.all().order_by('-date_entered')
-    serializer_class = ImageSerializer
+def home(request):
+    response = requests.get('http://localhost:8000/images/images/')
+    image_data = response.json()
+    print(image_data)
+    return render(request, 'images/home.html', {
+        'images': image_data,
+    })
