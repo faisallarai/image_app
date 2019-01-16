@@ -1,3 +1,12 @@
-from django.conf.urls import url
+from django.urls import path, include
+from rest_framework import routers
 
-app_name = 'images'
+from .views import ImageViewSet
+
+router = routers.DefaultRouter()
+router.register(r'images', ImageViewSet)
+
+
+urlpatterns = [
+    path('', include((router.urls))),
+]
