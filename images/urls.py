@@ -1,14 +1,10 @@
 from django.urls import path, include
-from rest_framework import routers
 
-from .viewsets import ImageViewSet
-from .views import home
+from images import views
 
-router = routers.DefaultRouter()
-router.register(r'images', ImageViewSet)
-
+app_name = 'images'
 
 urlpatterns = [
-    path('', include((router.urls))),
-    path('home/', home, name='home')
+    path('', views.ImageListCreateAPIView.as_view(), name='list'),
+    path('<int:pk>/', views.ImageRetrieveUpdateDestroyAPIView.as_view(), name='detail'),
 ]
