@@ -2,5 +2,13 @@
 
 {% block content %}
 <h1>Create</h1>
-
+<form action="{% url 'portal:create' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="title" id="title">
+    <input type="text" name="width" id="width">
+    <input type="text" name="height" id="height">
+    <input type="text" name="size" id="size">
+    <input type="file" name="image" id="image">
+    <input type="submit" value="Create">
+</form>
 {% endblock %}

@@ -19,16 +19,23 @@ def Create(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        r = requests.post('http://localhost:8000/images/',
-                          data={'title': title, 'width': width})
+        title = request.POST.get('title')
+        width = request.POST.get('width')
+        height = request.POST.get('height')
+        size = request.POST.get('size')
+        image = request.POST.get('image')
+        r = requests.post('http://localhost:8000/api/images/',
+                          data={'title': title,
+                                'width': width,
+                                'height': height,
+                                'image': image,
+                                'size': size
+                                })
         if r.status_code == 200:
             response = r.json()
             token = response['token']
             # Save token to session
             request.session['api_token'] = token
-        else:
-            messages.error(request, 'Authentication failed')
-            return HttpResponseRedirect(reverse('login'))
     else:
         return render(request, 'portal/create.html', {})
 
