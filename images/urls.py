@@ -20,7 +20,6 @@ urlpatterns += [
 
 # Add URLConf for api
 urlpatterns += [
-    path('api/image/create/', views.image_create, name='api-image-create'),
     path('api/', viewsets.ImageListCreateAPIView.as_view(), name='list'),
     path('api/<int:pk>',
          viewsets.ImageRetrieveUpdateDestroyAPIView.as_view(), name='detail'),
